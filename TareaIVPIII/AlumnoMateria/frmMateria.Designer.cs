@@ -45,6 +45,7 @@
             txtPrerequisito = new TextBox();
             label2 = new Label();
             txtNombreMateria = new TextBox();
+            btnLimpiar = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvMaterias).BeginInit();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dNumUv).BeginInit();
@@ -235,11 +236,23 @@
             txtNombreMateria.Size = new Size(197, 27);
             txtNombreMateria.TabIndex = 24;
             // 
+            // btnLimpiar
+            // 
+            btnLimpiar.Cursor = Cursors.Hand;
+            btnLimpiar.Location = new Point(574, 89);
+            btnLimpiar.Name = "btnLimpiar";
+            btnLimpiar.Size = new Size(72, 31);
+            btnLimpiar.TabIndex = 26;
+            btnLimpiar.Text = "Limpiar";
+            btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.Click += btnLimpiar_Click;
+            // 
             // frmMateria
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(934, 627);
+            Controls.Add(btnLimpiar);
             Controls.Add(groupBox1);
             Controls.Add(txtMateriaBuscar);
             Controls.Add(dgvMaterias);
@@ -276,5 +289,6 @@
         private TextBox txtPrerequisito;
         private Label label2;
         private TextBox txtNombreMateria;
+        private Button btnLimpiar;
     }
 }

@@ -1,20 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace TareaIVPIII.AlumnoMateria
 {
     public partial class frmAlumno : Form
     {
         private conexion conexion = new conexion();
-
         private string? _codigoAlum = null;
         private bool EsEditar = false;
         SqlDataReader leer;
@@ -34,7 +25,6 @@ namespace TareaIVPIII.AlumnoMateria
 
         private void frmAlumno_Load(object sender, EventArgs e)
         {
-
             LlenarDgvAlumnos("");
             LimpiarControles();
         }
@@ -56,19 +46,15 @@ namespace TareaIVPIII.AlumnoMateria
                 conexion conexion1 = new conexion();
                 SqlCommand comando = new SqlCommand();
                 DataTable tabla = new DataTable();
-
                 comando.Connection = conexion1.AbrirConexion();
                 comando.CommandText = "prc_MostrarAlumnos";
                 comando.CommandType = CommandType.StoredProcedure;
                 comando.Parameters.AddWithValue("@criterio", criterio);
                 comando.ExecuteNonQuery();
-
                 leer = comando.ExecuteReader();
                 tabla.Load(leer);
                 comando.Parameters.Clear();
-
                 conexion1.CerrarConexion();
-
                 dgvAlumnos.DataSource = tabla;
             }
             catch
@@ -110,11 +96,9 @@ namespace TareaIVPIII.AlumnoMateria
                         comando.Parameters.AddWithValue("@SegundoAp", SegundoAp);
                         comando.Parameters.AddWithValue("@edad", edad);
                         comando.Parameters.AddWithValue("@Direccion", Direccion);
-
                         comando.ExecuteNonQuery();
                         comando.Parameters.Clear();
                         conexion.CerrarConexion();
-
                         MessageBox.Show("SE INSERTÓ CORRECTAMENTE!");
                         LimpiarControles();
                         LlenarDgvAlumnos("");
@@ -130,7 +114,6 @@ namespace TareaIVPIII.AlumnoMateria
                     try
                     {
                         string? codigo = _codigoAlum;
-
                         comando.Connection = conexion.AbrirConexion();
                         comando.CommandText = "prc_EditarAlumno";
                         comando.CommandType = CommandType.StoredProcedure;
@@ -140,11 +123,9 @@ namespace TareaIVPIII.AlumnoMateria
                         comando.Parameters.AddWithValue("@SegundoAp", SegundoAp);
                         comando.Parameters.AddWithValue("@edad", edad);
                         comando.Parameters.AddWithValue("@Direccion", Direccion);
-
                         comando.ExecuteNonQuery();
                         comando.Parameters.Clear();
                         conexion.CerrarConexion();
-
                         MessageBox.Show("Se editó correctamente!");
                         LimpiarControles();
                         LlenarDgvAlumnos("");
@@ -168,7 +149,6 @@ namespace TareaIVPIII.AlumnoMateria
                 txtSegundoApell.Text = dgvAlumnos.CurrentRow.Cells["Segundo Apellido"].Value.ToString();
                 numEdad.Value = (int)dgvAlumnos.CurrentRow.Cells["Edad"].Value;
                 txtDireccion.Text = dgvAlumnos.CurrentRow.Cells["Dirección"].Value.ToString();
-
                 _codigoAlum = dgvAlumnos.CurrentRow.Cells["Código"].Value.ToString();
             }
         }
@@ -194,7 +174,6 @@ namespace TareaIVPIII.AlumnoMateria
                         comando.CommandType = CommandType.StoredProcedure;
                         comando.Parameters.AddWithValue("@codigoAlum", _codigoAlum);
                         comando.ExecuteNonQuery();
-
                         comando.Parameters.Clear();
                         conexion.CerrarConexion();
 
@@ -227,6 +206,12 @@ namespace TareaIVPIII.AlumnoMateria
                 return true;
             else
                 return false;
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            LimpiarControles();
+            txtBuscarAlum.Text = "";
         }
     }
 }

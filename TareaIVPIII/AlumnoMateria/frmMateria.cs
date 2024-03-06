@@ -1,20 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace TareaIVPIII.AlumnoMateria
 {
     public partial class frmMateria : Form
     {
         private conexion conexion = new conexion();
-
         private string? _codigoMat = null;
         private bool EsEditar = false;
         SqlDataReader leer;
@@ -23,7 +14,6 @@ namespace TareaIVPIII.AlumnoMateria
         public frmMateria()
         {
             InitializeComponent();
-
         }
 
         private void frmMateria_Load(object sender, EventArgs e)
@@ -54,13 +44,10 @@ namespace TareaIVPIII.AlumnoMateria
                 comando.CommandType = CommandType.StoredProcedure;
                 comando.Parameters.AddWithValue("@criterio", criterio);
                 comando.ExecuteNonQuery();
-
                 leer = comando.ExecuteReader();
                 tabla.Load(leer);
                 comando.Parameters.Clear();
-
                 conexion1.CerrarConexion();
-
                 dgvMaterias.DataSource = tabla;
             }
             catch
@@ -77,7 +64,6 @@ namespace TareaIVPIII.AlumnoMateria
             frmMantenimientoAM frmMantenimiento = new frmMantenimientoAM();
             frmMantenimiento.Show();
             this.Hide();
-
         }
 
         private void btnBuscarMat_Click(object sender, EventArgs e)
@@ -106,11 +92,9 @@ namespace TareaIVPIII.AlumnoMateria
                         comando.Parameters.AddWithValue("@Nombre", Nombre);
                         comando.Parameters.AddWithValue("@UV", uv);
                         comando.Parameters.AddWithValue("@prerequisitos", prereq);
-
                         comando.ExecuteNonQuery();
                         comando.Parameters.Clear();
                         conexion.CerrarConexion();
-
                         MessageBox.Show("SE INSERTÓ CORRECTAMENTE!");
                         LimpiarControles();
                         LlenarDgvMateria("");
@@ -126,7 +110,6 @@ namespace TareaIVPIII.AlumnoMateria
                     try
                     {
                         string? codigo = _codigoMat;
-
                         comando.Connection = conexion.AbrirConexion();
                         comando.CommandText = "prc_EditarMateria";
                         comando.CommandType = CommandType.StoredProcedure;
@@ -134,11 +117,9 @@ namespace TareaIVPIII.AlumnoMateria
                         comando.Parameters.AddWithValue("@Nombre", Nombre);
                         comando.Parameters.AddWithValue("@UV", uv);
                         comando.Parameters.AddWithValue("@prerequisitos", prereq);
-
                         comando.ExecuteNonQuery();
                         comando.Parameters.Clear();
                         conexion.CerrarConexion();
-
                         MessageBox.Show("Se editó correctamente!");
                         LimpiarControles();
                         LlenarDgvMateria("");
@@ -160,7 +141,6 @@ namespace TareaIVPIII.AlumnoMateria
                 txtNombreMateria.Text = dgvMaterias.CurrentRow.Cells["Nombre"].Value.ToString();
                 dNumUv.Value = (int)dgvMaterias.CurrentRow.Cells["UV"].Value;
                 txtPrerequisito.Text = dgvMaterias.CurrentRow.Cells["PreRequisitos"].Value.ToString();
-
                 _codigoMat = dgvMaterias.CurrentRow.Cells["Código"].Value.ToString();
             }
         }
@@ -185,10 +165,8 @@ namespace TareaIVPIII.AlumnoMateria
                         comando.CommandType = CommandType.StoredProcedure;
                         comando.Parameters.AddWithValue("@codigoMat", _codigoMat);
                         comando.ExecuteNonQuery();
-
                         comando.Parameters.Clear();
                         conexion.CerrarConexion();
-
                         MessageBox.Show("Se eliminó correctamente!");
                         LlenarDgvMateria("");
                     }
@@ -211,11 +189,15 @@ namespace TareaIVPIII.AlumnoMateria
             bool dos = txtNombreMateria.Text != "";
             bool tres = dNumUv.Value > 0;
             bool cuatro = txtPrerequisito.Text != "";
-
             if (uno && dos && tres && cuatro)
                 return true;
             else
                 return false;
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            LimpiarControles();
         }
     }
 }

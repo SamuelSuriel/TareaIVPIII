@@ -49,6 +49,7 @@
             txtCodAlumno = new TextBox();
             numEdad = new NumericUpDown();
             groupBox1 = new GroupBox();
+            btnLimpiar = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvAlumnos).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numEdad).BeginInit();
             groupBox1.SuspendLayout();
@@ -103,7 +104,7 @@
             // btnVolverAlum
             // 
             btnVolverAlum.Cursor = Cursors.Hand;
-            btnVolverAlum.Location = new Point(866, 616);
+            btnVolverAlum.Location = new Point(838, 616);
             btnVolverAlum.Name = "btnVolverAlum";
             btnVolverAlum.Size = new Size(95, 31);
             btnVolverAlum.TabIndex = 7;
@@ -274,11 +275,23 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "CRUD";
             // 
+            // btnLimpiar
+            // 
+            btnLimpiar.Cursor = Cursors.Hand;
+            btnLimpiar.Location = new Point(611, 100);
+            btnLimpiar.Name = "btnLimpiar";
+            btnLimpiar.Size = new Size(72, 31);
+            btnLimpiar.TabIndex = 25;
+            btnLimpiar.Text = "Limpiar";
+            btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.Click += btnLimpiar_Click;
+            // 
             // frmAlumno
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(973, 651);
+            ClientSize = new Size(946, 651);
+            Controls.Add(btnLimpiar);
             Controls.Add(numEdad);
             Controls.Add(label7);
             Controls.Add(label6);
@@ -334,5 +347,6 @@
         private TextBox txtCodAlumno;
         private NumericUpDown numEdad;
         private GroupBox groupBox1;
+        private Button btnLimpiar;
     }
 }
